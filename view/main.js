@@ -15,15 +15,23 @@ renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( window.innerWidth, window.innerHeight );
 camera.position.setZ(30);
 
+var cloud;
+var sun;
+var rain;
+var snow;
+var cloudSun;
+var thunder;
 
-const light = new THREE.AmbientLight( 0x404040 ); // soft white light
+
+const light = new THREE.AmbientLight( 0xffffff ); // soft white light
 scene.add( light );
 
-const cloud = loader.load( '../assets/models/cloud/scene.gltf', function ( gltf ) {
+// Cloud
+loader.load( '../assets/models/cloud/scene.gltf', function ( gltf ) {
 
-  const cloud = gltf.scene;
-
-  console.log(cloud)
+  cloud = gltf.scene;
+  cloud.scale.set(2, 2, 2);
+  cloud.position.y = 10;
 
 	scene.add( cloud );
 
@@ -32,6 +40,35 @@ const cloud = loader.load( '../assets/models/cloud/scene.gltf', function ( gltf 
 	console.error( error );
 
 } );
+
+// Sun 
+loader.load( '../assets/models/sun/scene.gltf', function ( gltf ) {
+
+  sun = gltf.scene;
+  sun.scale.set(2, 2, 2);
+  sun.position.y = -10;
+
+	scene.add( sun );
+
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+} );
+
+// Rain
+loader.load( '../assets/models/rain/scene.glb', function ( gltf ) {
+
+  rain = gltf.scene;
+  console.log(rain);
+	scene.add( rain );
+
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+} );
+
 
 function animate (){
   requestAnimationFrame(animate);
