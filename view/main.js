@@ -27,10 +27,10 @@ const light = new THREE.AmbientLight( 0xffffff ); // soft white light
 scene.add( light );
 
 // Cloud
-loader.load( '../assets/models/cloud/scene.gltf', function ( gltf ) {
+loader.load( '../assets/models/cloud.glb', function ( gltf ) {
 
   cloud = gltf.scene;
-  cloud.scale.set(2, 2, 2);
+  cloud.scale.set(1,1,1);
   cloud.position.y = 10;
 
 	scene.add( cloud );
@@ -42,10 +42,10 @@ loader.load( '../assets/models/cloud/scene.gltf', function ( gltf ) {
 } );
 
 // Sun 
-loader.load( '../assets/models/sun/scene.gltf', function ( gltf ) {
+loader.load( '../assets/models/sun.glb', function ( gltf ) {
 
   sun = gltf.scene;
-  sun.scale.set(2, 2, 2);
+  sun.scale.set(1,1,1);
   sun.position.y = -10;
 
 	scene.add( sun );
@@ -57,11 +57,69 @@ loader.load( '../assets/models/sun/scene.gltf', function ( gltf ) {
 } );
 
 // Rain
-loader.load( '../assets/models/rain/scene.glb', function ( gltf ) {
+loader.load( '../assets/models/rain.glb', function ( gltf ) {
 
   rain = gltf.scene;
   console.log(rain);
+  rain.scale.set(1,1,1);
+  rain.position.y = -10;
+  rain.position.x = -10;
+
+
 	scene.add( rain );
+
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+} );
+
+
+// thunder
+loader.load( '../assets/models/thunder.glb', function ( gltf ) {
+
+  thunder = gltf.scene;
+  thunder.scale.set(1, 1, 1);
+  thunder.position.y = -10;
+  thunder.position.x = 10;
+
+
+	scene.add( thunder );
+
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+} );
+
+
+// cloudSun
+loader.load( '../assets/models/cloudSun.glb', function ( gltf ) {
+
+  cloudSun = gltf.scene;
+  cloudSun.scale.set(1, 1, 1);
+  cloudSun.position.y = -10;
+  cloudSun.position.x = 20;
+
+
+	scene.add( cloudSun );
+
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+} );
+
+// snow
+loader.load( '../assets/models/cloudSnow.glb', function ( gltf ) {
+
+  snow = gltf.scene;
+  snow.scale.set(1, 1, 1);
+  snow.position.y = -10;
+  snow.position.x = -20;
+
+
+	scene.add( snow );
 
 }, undefined, function ( error ) {
 
