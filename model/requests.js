@@ -1,5 +1,5 @@
-const url = process.env.APIURL;
-const key = process.env.APIKEY;
+const url = import.meta.env.APIURL;
+const key = import.meta.env.APIKEY;
 const xhttp = new XMLHttpRequest();
 const headers = {
   "key": key
@@ -12,7 +12,7 @@ const headers = {
  * @param city  
  * @return  
  */
-function GetWeather(location) {
+export function GetWeather(location) {
 
   headers.q = location;
   console.log(headers);
@@ -23,8 +23,4 @@ function GetWeather(location) {
       console.log(xhttp.responseText);
     })
 
-}
-
-export default {
-  GetLocalWeather
 }

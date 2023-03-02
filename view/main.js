@@ -1,4 +1,4 @@
-import GetLocalWeather from '../controller/requests.js';
+import { GetLocalWeather } from '../controller/requests.js';
 
 GetLocalWeather();
 
