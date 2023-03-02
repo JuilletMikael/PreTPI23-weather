@@ -1,5 +1,5 @@
-const url = import.meta.env.APIURL;
-const key = import.meta.env.APIKEY;
+const url = import.meta.env.VITE_API_URL;
+const key = import.meta.env.VITE_API_KEY;
 const xhttp = new XMLHttpRequest();
 const headers = {
   "key": key
@@ -15,12 +15,12 @@ const headers = {
 export function GetWeather(location) {
 
   headers.q = location;
-  console.log(headers);
 
-    xhttp.open("GET", url + "weather.ashx", true);
-    xhttp.send();
-    xhttp.addEventListener('load', function(){
-      console.log(xhttp.responseText);
-    })
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.open("GET", url + "weather.ashx", true);
+  xhttp.send();
+  xhttp.addEventListener('load', function(){
+    console.log(xhttp.responseText);
+  })
 
 }
