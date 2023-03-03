@@ -65,7 +65,6 @@ loader.load( '../assets/models/sun.glb', function ( gltf ) {
 loader.load( '../assets/models/rain.glb', function ( gltf ) {
 
   rain = gltf.scene;
-  console.log(rain);
   rain.scale.set(1,1,1);
   rain.position.y = -10;
   rain.position.x = -10;
