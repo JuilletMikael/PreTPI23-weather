@@ -11,17 +11,21 @@ const parameters = {
  * q is the parameters name asked for the location 
  *
  * @param location  correspond to the target location
+ * @return Response from API 
  */
 export function GetWeather(location) {
+  return new Promise(resolve => {
 
-  parameters.q = location;
+    parameters.q = location;
 
-  xhttp.open("GET", formatURL("weather.ashx") , true);  
-  xhttp.send();
-  xhttp.addEventListener('load', function(){
-    console.log(xhttp.responseText);
+    xhttp.open("GET", formatURL("weather.ashx") , true);  
+    xhttp.send();
+    xhttp.addEventListener('load', function(){
+      console.log(xhttp.responseText);
+      resolve(xhttp.responseText);
+    })
+
   })
-
 }
 
 
