@@ -14,5 +14,5 @@ const button = document.querySelector('#search');
 // Request API when button clicked.
 button.addEventListener('click', async () => {
   const city = input.value;
-  result.innerHTML = await GetLocalWeather(city);
+  if(city) result.innerHTML = await GetLocalWeather(city);
 });
