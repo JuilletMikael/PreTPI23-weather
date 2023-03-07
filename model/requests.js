@@ -1,6 +1,6 @@
 const url = import.meta.env.VITE_API_URL;
 const key = import.meta.env.VITE_API_KEY;
-const xhttp = new XMLHttpRequest();
+const format = "format=json";
 const parameters = {
   "key": key
 };
@@ -17,13 +17,15 @@ export function GetWeather(location) {
   return new Promise(resolve => {
 
     parameters.q = location;
-
-    xhttp.open("GET", formatURL("weather.ashx") , true);  
-    xhttp.send();
-    xhttp.addEventListener('load', function(){
-      console.log(xhttp.responseText);
-      resolve(xhttp.responseText);
+    
+    fetch(formatURL("weather.ashx"))
+    .then(response => {
+      return response.json()
     })
+    .then(data => console.log(data.data))
+    .catch(function (err) {
+        console.log("Something went wrong!", err);
+    });
 
   })
 }
@@ -45,6 +47,7 @@ function formatURL(apiType) {
     if (index !== Object.keys(parameters).length - 1) {
       fullURL = fullURL + "&";
     }
+    else fullURL = fullURL + "&" + format;
 
   });
 
