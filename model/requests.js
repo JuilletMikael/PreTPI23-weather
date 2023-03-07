@@ -22,7 +22,9 @@ export function GetWeather(location) {
     .then(response => {
       return response.json()
     })
-    .then(data => console.log(data.data))
+    .then(data => {
+      resolve(data.data);
+    })
     .catch(function (err) {
         console.log("Something went wrong!", err);
     });
