@@ -1,5 +1,4 @@
 import '../assets/css/style.css';
-import '../controller/models.js';
 import { GetLocalWeather } from '../controller/requests.js';
 
 document.querySelector('#app').innerHTML = `
