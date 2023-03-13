@@ -19,7 +19,7 @@ export function Init(data) {
   const light = new THREE.AmbientLight(0xffffff); // soft white light
   scene.add(light);
 
-  FilterWeather(data);
+  CrateModel(data);
 
 
   document.body.appendChild(renderer.domElement);
@@ -32,30 +32,22 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-export function FilterWeather(data){
-  console.log(data.weather);
-  var model;
+function CrateModel(data){
 
   for (let i = 0; i <= 7; i++) {
-    console.log(data.weather[i].totalSnow_cm)
 
-    if (data.weather[i].totalSnow_cm > 0){
-      model = "cloudSnow.glb";
-    }
+    const model = FilterWeather(data);
 
-    CrateModel(model);
+    loader.load('../assets/models/' + model, function(gltf) {
+      const modelCrated = gltf.scene;
+      modelCrated.scale.set(1, 1, 1);
+      modelCrated.position.y = 10;
+      scene.add(modelCrated);
+    }, undefined, function(error) {
+      console.log(error);
+    });
+
   }
-
-
 }
 
-function CrateModel(model){
-  loader.load('../assets/models/' + model, function(gltf) {
-    const modelCrated = gltf.scene;
-    modelCrated.scale.set(1, 1, 1);
-    modelCrated.position.y = 10;
-    scene.add(modelCrated);
-  }, undefined, function(error) {
-    console.log(error);
-  });
-}
+  

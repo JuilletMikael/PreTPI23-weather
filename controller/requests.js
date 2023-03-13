@@ -1,5 +1,6 @@
 import { GetWeather } from '../model/requests.js';
-import  { Init } from '../controller/models.js';
+import { Init } from '../controller/models.js';
+import { FilteredWeather } from '../controller/filterLocalWeather.js';
 
 export async function GetLocalWeather(city){
 
@@ -10,7 +11,8 @@ export async function GetLocalWeather(city){
         return "La ville que vous cherchez n'a pas été trouvée."
     }
 
-    Init(response);
+    const filtredWeather = FilteredWeather(response);
 
-    return response
+
+    return filtredWeather;
 }
