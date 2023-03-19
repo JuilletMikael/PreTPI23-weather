@@ -176,6 +176,12 @@ function WindDirection(weatherByDay) {
 
 }
 
+
+function city(weather) {
+
+    console.log(weather)
+}
+
 /**
  * This function filter and format data get.
  *
@@ -183,10 +189,8 @@ function WindDirection(weatherByDay) {
  * @return  Formated weather informations.
  */
 export function FilteredWeather(data) {
-
+    
     const weather = useWeatherStore()
-
-    weather.city = data.city;
 
     data.weather.forEach( weatherByDay => {
         
