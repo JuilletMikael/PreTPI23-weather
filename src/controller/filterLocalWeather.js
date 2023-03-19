@@ -1,72 +1,73 @@
-import moment from "moment/moment";
+import moment from 'moment';
+import{ useWeatherStore } from '@/stores/weatherStore';
 
 /**
  * Calculate average wind speed.
  *
- * @param weather  weather by day informations.
+ * @param weatherByDay  weather by day informations.
  * @return  number average wind speed.
  */
-function AverageWind(weather) {
+function AverageWind(weatherByDay) {
     
     var wind = 0;
 
-    weather.hourly.forEach(weatherHourly => {
+    weatherByDay.hourly.forEach(weatherHourly => {
         wind = wind + parseInt(weatherHourly.windspeedKmph);
     })
 
-    return wind / weather.hourly.length;
+    return wind / weatherByDay.hourly.length;
 
 }
 
 /**
  * Calculate average posibility to have rain.
  *
- * @param weather  weather by day informations.
+ * @param weatherByDay  weather by day informations.
  * @return   number chance to have rain. 
  */
-function ChanceOfRain(weather) {
+function ChanceOfRain(weatherByDay) {
 
     var rain = 0;
 
-    weather.hourly.forEach(weatherHourly => {
+    weatherByDay.hourly.forEach(weatherHourly => {
         rain = rain + parseInt(weatherHourly.chanceofrain);
     })
     
-    return rain / weather.hourly.length;
+    return rain / weatherByDay.hourly.length;
 
 }
 
 /**
  * Calculate average posibility to have thunder.
  *
- * @param weather  weather by day informations.
+ * @param weatherByDay  weather by day informations.
  * @return  number chance to have thunder. 
  */
-function ChanceOfThunder(weather) {
+function ChanceOfThunder(weatherByDay) {
 
     var thunder = 0;
 
-    weather.hourly.forEach(weatherHourly => {
+    weatherByDay.hourly.forEach(weatherHourly => {
         thunder = thunder + parseInt(weatherHourly.chanceofthunder);
     })
     
-    return thunder / weather.hourly.length;
+    return thunder / weatherByDay.hourly.length;
 
 }
 
 /**
  * Calculate time between sunset and sunrise with UTC format.
  *
- * @param weather  weather by day informations.
+ * @param weatherByDay  weather by day informations.
  * @return  text `${hours}:${minutes}` ex. 14:30
  */
-function DayTime(weather) {
+function DayTime(weatherByDay) {
 
     var formatSunset;
     var formatSunrise;
-    const date = weather.date;
+    const date = weatherByDay.date;
 
-    weather.astronomy.forEach(astronomy => {
+    weatherByDay.astronomy.forEach(astronomy => {
         const sunset = new Date(date + " " + astronomy.sunset);
         const sunrise = new Date(date + " " + astronomy.sunrise);
         // Transform date to UTC format 
@@ -86,14 +87,14 @@ function DayTime(weather) {
 /**
  * Get sunset hour in 12 format and change to 24 format.
  *
- * @param weather  weather by day informations.
+ * @param weatherByDay  weather by day informations.
  * @return  sunset time formated in 24 format.
  */
-function Sunset(weather) {
+function Sunset(weatherByDay) {
 
     var time
 
-    weather.astronomy.forEach(astronomy => {
+    weatherByDay.astronomy.forEach(astronomy => {
         time = moment(astronomy.sunset, "hh:mm A").format('HH:mm');
     })
     
@@ -104,14 +105,14 @@ function Sunset(weather) {
 /**
  * Get sunrise hour in 12 format and change to 24 format.
  *
- * @param weather  weather by day informations.
+ * @param weatherByDay  weather by day informations.
  * @return  sunrise time formated in 24 format. 
  */
-function Sunrise(weather) {
+function Sunrise(weatherByDay) {
 
     var time
 
-    weather.astronomy.forEach(astronomy => {
+    weatherByDay.astronomy.forEach(astronomy => {
         time = moment(astronomy.sunrise, "hh:mm A").format('HH:mm');
     })
     
@@ -122,18 +123,18 @@ function Sunrise(weather) {
 /**
  * Filter Daily informations to know what kind of weather it is.  
  * 
- * @param weather weather by day informations.
+ * @param weatherByDay weather by day informations.
  * @return  text of weather. 
  */
-function GlobalWeather(weather) {
+function GlobalWeather(weatherByDay) {
 
-    const [hours, minutes] = DayTime(weather).split(':');
+    const [hours, minutes] = DayTime(weatherByDay).split(':');
     const time = hours * 60 + parseInt(minutes);
-    const sunTimePercent =  time * 100 /weather.sunHour;
+    const sunTimePercent =  time * 100 /weatherByDay.sunHour;
 
-    if ( weather.totalSnow_cm > 0)   return "snow";
-    if ( ChanceOfRain(weather) >= 50)  return "rain";
-    if ( ChanceOfThunder(weather) >= 50)  return "thunder";
+    if ( weatherByDay.totalSnow_cm > 0)   return "snow";
+    if ( ChanceOfRain(weatherByDay) >= 50)  return "rain";
+    if ( ChanceOfThunder(weatherByDay) >= 50)  return "thunder";
     if ( sunTimePercent >= 70 ) return "sun";
     if ( sunTimePercent < 30) return "cloud";
     if ( sunTimePercent >= 30 && sunTimePercent < 70 ) return "cloudSun";
@@ -143,12 +144,12 @@ function GlobalWeather(weather) {
 /**
  * Sum millimeter rain precipitation for the day.
  *
- * @param weather  weather by day informations.
+ * @param weatherByDay  weather by day informations.
  * @return  number of total precipitation rain.
  */
-function TotalRain(weather) {
+function TotalRain(weatherByDay) {
     var rain = 0;
-    weather.hourly.forEach(weatherHourly => {
+    weatherByDay.hourly.forEach(weatherHourly => {
         rain = rain + parseInt(weatherHourly.precipMM);
     })
     
@@ -158,15 +159,15 @@ function TotalRain(weather) {
 /**
  * Make the average degree wind direction and change the degree in the direction.
  *
- * @param weather weather by day informations.
+ * @param weatherByDay weather by day informations.
  * @return  text of cardinal direction.
  */
-function WindDirection(weather) {
+function WindDirection(weatherByDay) {
     var windDegree = 0;
-    weather.hourly.forEach(weatherHourly => {
+    weatherByDay.hourly.forEach(weatherHourly => {
         windDegree = windDegree + parseInt(weatherHourly.winddirDegree);
     })
-    const degree = windDegree / weather.hourly.length;
+    const degree = windDegree / weatherByDay.hourly.length;
 
     if (degree < 45 && degree > 315) return "Nord";
     if (degree > 45 && degree < 135) return "Est";
@@ -182,10 +183,10 @@ function WindDirection(weather) {
  * @return  Formated weather informations.
  */
 export function FilteredWeather(data) {
-    var weather = {
-        city : data.city,
-        weather : [],
-    };
+
+    const weather = useWeatherStore()
+
+    weather.city = data.city;
 
     data.weather.forEach( weatherByDay => {
         
@@ -208,7 +209,5 @@ export function FilteredWeather(data) {
 
 
     });
-
-   return weather;
 
 }
