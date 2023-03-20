@@ -1,6 +1,11 @@
 <script setup>
 import moment from 'moment';
-import Models from './Models.vue'
+import { onMounted } from 'vue';
+import MeteoRenderer from './MeteoRenderer.vue'
+
+import localization from 'moment/locale/fr';
+
+moment.updateLocale('fr', localization);
 
 const props = defineProps({
     weather : Object
@@ -9,13 +14,15 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="weekContainer" v-for="(weatherByDay, index) in props.weather" :key="index" >
-        <div v-if="index < 7">
-            <span>{{ moment(weatherByDay.day, 'YYYY-MM-DD').format("dddd") }}</span>
-            <div class="model">
-                <Models :model="weatherByDay.globalWeather"></Models>
+    <div class="weekContainer">
+        <div class="weekContainer__day" v-for="(weatherByDay, index) in props.weather" :key="index" >
+            <div v-if="index < 7">
+                <span>{{ moment(weatherByDay.day, 'YYYY-MM-DD').format("dddd") }}</span>
+                <div class="model">
+                    <MeteoRenderer :model="weatherByDay.globalWeather"></MeteoRenderer>
+                </div>
+                <span>{{ weatherByDay.minTempC }}° {{ weatherByDay.maxTempC }}°</span>
             </div>
-            <span>{{ weatherByDay.minTempC }}° {{ weatherByDay.maxTempC }}°</span>
         </div>
     </div>
 </template>
@@ -23,14 +30,19 @@ const props = defineProps({
 <style scoped>
 .model {
     aspect-ratio: 1/1;
-    width: 10vw;
-    height: 10vw;
+    width: 6vw;
+    margin: auto;
 }
-
 
 .weekContainer {
+    display: flex;
+    flex-wrap: wrap;
     align-content: center;
-    text-align: center;
-    display: inline-flex;
+    justify-content: center;
 }
+
+.weekContainer__day {
+   text-align: center;
+}
+
 </style>
