@@ -43,6 +43,7 @@
    9*6
         const loader = new GLTFLoader();
 
+        // Ceation du model
         loader.load('../src/assets/models/' + props.model + '.glb', 
         function(gltf) {
             const modelCrated = gltf.scene;
@@ -62,3 +63,12 @@
         animate();
     });
   </script>
+
+<style scoped>
+
+.container{
+    aspect-ratio: 1/1;
+     
+}
+
+</style>

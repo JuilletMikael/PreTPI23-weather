@@ -17,6 +17,8 @@ function SelectChoosenDay(){
     //TODO : make posible to choose the day.
 }
 
+
+// TODO : reset store when request made.
 async function send(){
     if(weather.city) error.value = await GetLocalWeather(weather.city);
 }
