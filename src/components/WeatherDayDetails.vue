@@ -62,79 +62,161 @@
 </template>
 
 <style scoped>
+
 .weatherContainer{
-    align-content: center;
-    text-align: center;
-    justify-content: center;
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 0.5fr 1fr 1fr 0.5fr;
-    margin: 0 13vw;
-    justify-items: center;
-    align-items: center;
+        align-content: center;
+        text-align: center;
+        justify-content: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        margin: 0 13vw;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .weatherContainer__model {
+        width: max-content;
+        grid-column: 1 / 3;
+        grid-row: 2 / 3;
+        max-width: 50vw;
+    }
+
+    .weatherContainer__title{
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+    }
+
+
+    .weatherContainer__temp{
+        grid-column: 1 / 3;
+        grid-row: 3 / 4; 
+    }
+
+    .weatherContainer__sunHour{
+        grid-column: 1 / 2;
+        grid-row: 4 / 5; 
+        display: flex;
+        align-items: center;
+    }
+    .weatherContainer__sunHour img{
+        margin-right: 0.5rem;
+    }
+
+    .weatherContainer__sunInfo{
+        grid-column: 1 / 2;
+        grid-row: 5 / 6; 
+    }
+
+    .weatherContainer__sunInfo--hour{
+        display: inline-flex;
+        margin: 0 2px;
+    }
+
+    .weatherContainer__sunInfo--hour span{
+        display: block;
+    }
+
+    .weatherContainer__rainInfo{
+        grid-column: 2 / 3;
+        grid-row: 5 / 6; 
+        display: flex;
+        align-items: center;
+    }
+
+    .weatherContainer__rainInfo img{
+        margin-right: 0.5rem;
+    }
+
+    .weatherContainer__windInfo{
+        grid-column: 2 / 3;
+        grid-row: 4 / 5;
+        display: flex;
+        align-items: center; 
+    }
+
+    .weatherContainer__windInfo img{
+        margin-right: 0.5rem;
+    }
+
+
+
+@media screen and (min-width: 600px) {
+    .weatherContainer{
+        align-content: center;
+        text-align: center;
+        justify-content: center;
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: 0.5fr 1fr 1fr 0.5fr;
+        margin: 0 13vw;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .weatherContainer__model {
+        width: max-content;
+        grid-column: 2 / 3;
+        grid-row: 2 / 4;
+    }
+
+    .weatherContainer__title{
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+    }
+
+
+    .weatherContainer__temp{
+        grid-column: 2 / 3;
+        grid-row: 4 / 5; 
+    }
+
+    .weatherContainer__sunHour{
+        grid-column: 1 / 2;
+        grid-row: 2 / 3; 
+        display: flex;
+        align-items: center;
+    }
+    .weatherContainer__sunHour img{
+        margin-right: 0.5rem;
+    }
+
+    .weatherContainer__sunInfo{
+        grid-column: 1 / 2;
+        grid-row: 3 / 4; 
+    }
+
+    .weatherContainer__sunInfo--hour{
+        display: inline-flex;
+        margin: 0 2px;
+    }
+
+    .weatherContainer__sunInfo--hour span{
+        display: block;
+    }
+
+    .weatherContainer__rainInfo{
+        grid-column: 3 / 4;
+        grid-row: 3 / 4; 
+        display: flex;
+        align-items: center;
+    }
+
+    .weatherContainer__rainInfo img{
+        margin-right: 0.5rem;
+    }
+
+    .weatherContainer__windInfo{
+        grid-column: 3 / 4;
+        grid-row: 2 / 3;
+        display: flex;
+        align-items: center; 
+    }
+
+    .weatherContainer__windInfo img{
+        margin-right: 0.5rem;
+    }
 }
 
-.weatherContainer__model {
-    width: max-content;
-    grid-column: 2 / 3;
-    grid-row: 2 / 4;
-}
-
-.weatherContainer__title{
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-}
-
-
-.weatherContainer__temp{
-    grid-column: 2 / 3;
-    grid-row: 4 / 5; 
-}
-
-.weatherContainer__sunHour{
-    grid-column: 1 / 2;
-    grid-row: 2 / 3; 
-    display: flex;
-    align-items: center;
-}
-.weatherContainer__sunHour img{
-    margin-right: 0.5rem;
-}
-
-.weatherContainer__sunInfo{
-    grid-column: 1 / 2;
-    grid-row: 3 / 4; 
-}
-
-.weatherContainer__sunInfo--hour{
-    display: inline-flex;
-    margin: 0 2px;
-}
-
-.weatherContainer__sunInfo--hour span{
-    display: block;
-}
-
-.weatherContainer__rainInfo{
-    grid-column: 3 / 4;
-    grid-row: 3 / 4; 
-    display: flex;
-    align-items: center;
-}
-
-.weatherContainer__rainInfo img{
-    margin-right: 0.5rem;
-}
-
-.weatherContainer__windInfo{
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
-    display: flex;
-    align-items: center; 
-}
-
-.weatherContainer__windInfo img{
-    margin-right: 0.5rem;
-}
 
 </style>

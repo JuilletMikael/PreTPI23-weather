@@ -18,7 +18,7 @@ const props = defineProps({
         <div class="weekContainer__day" v-for="(weatherByDay, index) in props.weather" :key="index" >
             <div v-if="index < 7">
                 <span>{{ moment(weatherByDay.day, 'YYYY-MM-DD').format("dddd") }}</span>
-                <div class="model">
+                <div class="weekContainer__model">
                     <MeteoRenderer :model="weatherByDay.globalWeather"></MeteoRenderer>
                 </div>
                 <span>{{ weatherByDay.minTempC }}° {{ weatherByDay.maxTempC }}°</span>
@@ -28,17 +28,18 @@ const props = defineProps({
 </template>
 
 <style scoped>
-.model {
-    aspect-ratio: 1/1;
-    width: 6vw;
-    margin: auto;
-}
-
 .weekContainer {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
+    margin-top: 5vh;
+}
+
+.weekContainer__model {
+    aspect-ratio: 1/1;
+    width: 10vw;
+    margin: auto;
 }
 
 .weekContainer__day {
