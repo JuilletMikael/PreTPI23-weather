@@ -63,7 +63,7 @@
 
 <style scoped>
 
-.weatherContainer{
+    .weatherContainer{
         align-content: center;
         text-align: center;
         justify-content: center;
@@ -79,7 +79,7 @@
         width: max-content;
         grid-column: 1 / 3;
         grid-row: 2 / 3;
-        max-width: 50vw;
+        max-width: 25vw;
     }
 
     .weatherContainer__title{
@@ -143,19 +143,11 @@
 
 @media screen and (min-width: 600px) {
     .weatherContainer{
-        align-content: center;
-        text-align: center;
-        justify-content: center;
-        display: grid;
         grid-template-columns: 1fr 2fr 1fr;
         grid-template-rows: 0.5fr 1fr 1fr 0.5fr;
-        margin: 0 13vw;
-        justify-items: center;
-        align-items: center;
     }
 
     .weatherContainer__model {
-        width: max-content;
         grid-column: 2 / 3;
         grid-row: 2 / 4;
     }
@@ -174,8 +166,6 @@
     .weatherContainer__sunHour{
         grid-column: 1 / 2;
         grid-row: 2 / 3; 
-        display: flex;
-        align-items: center;
     }
     .weatherContainer__sunHour img{
         margin-right: 0.5rem;
@@ -187,19 +177,12 @@
     }
 
     .weatherContainer__sunInfo--hour{
-        display: inline-flex;
         margin: 0 2px;
-    }
-
-    .weatherContainer__sunInfo--hour span{
-        display: block;
     }
 
     .weatherContainer__rainInfo{
         grid-column: 3 / 4;
         grid-row: 3 / 4; 
-        display: flex;
-        align-items: center;
     }
 
     .weatherContainer__rainInfo img{
@@ -208,14 +191,9 @@
 
     .weatherContainer__windInfo{
         grid-column: 3 / 4;
-        grid-row: 2 / 3;
-        display: flex;
-        align-items: center; 
+        grid-row: 2 / 3;; 
     }
 
-    .weatherContainer__windInfo img{
-        margin-right: 0.5rem;
-    }
 }
 
 
