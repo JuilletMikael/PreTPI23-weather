@@ -2,6 +2,11 @@
     import moment from 'moment';
     import MeteoRenderer from './MeteoRenderer.vue'
 
+    var localLocale = moment();
+    console.log(localLocale);
+    localLocale.locale('fr');
+    console.log(localLocale);
+
     const props = defineProps({
         weather : Object
     })

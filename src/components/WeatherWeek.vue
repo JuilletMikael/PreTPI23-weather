@@ -5,7 +5,8 @@ import MeteoRenderer from './MeteoRenderer.vue'
 
 import localization from 'moment/locale/fr';
 
-moment.updateLocale('fr', localization);
+moment.locale('fr', localization);
+console.log(moment())
 
 const props = defineProps({
     weather : Object
@@ -17,7 +18,7 @@ const props = defineProps({
     <div class="weekContainer">
         <div class="weekContainer__day" v-for="(weatherByDay, index) in props.weather" :key="index" >
             <div v-if="index < 7">
-                <span>{{ moment(weatherByDay.day, 'YYYY-MM-DD').format("dddd") }}</span>
+                <span>{{ moment(weatherByDay.day, 'YYYY-MM-DD').locale('fr').format("dd") }}</span>
                 <div class="weekContainer__model">
                     <MeteoRenderer :model="weatherByDay.globalWeather"></MeteoRenderer>
                 </div>

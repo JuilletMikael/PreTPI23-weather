@@ -192,6 +192,8 @@ export function FilteredWeather(data) {
     
     const weather = useWeatherStore()
 
+    console.log(data);
+
     data.weather.forEach( weatherByDay => {
         
         weather.weather.push({
