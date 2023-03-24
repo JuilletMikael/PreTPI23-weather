@@ -3,9 +3,9 @@
     import MeteoRenderer from './MeteoRenderer.vue'
 
     var localLocale = moment();
-    console.log(localLocale);
     localLocale.locale('fr');
-    console.log(localLocale);
+    
+    const index = 'day';
 
     const props = defineProps({
         weather : Object
@@ -19,7 +19,7 @@
         </h1>
 
         <div class="weatherContainer__model">
-            <MeteoRenderer :model="props.weather.globalWeather"></MeteoRenderer>
+            <MeteoRenderer :model="props.weather.globalWeather" :canvasIndex="'canvas-' + index"></MeteoRenderer>
         </div>
 
         <h1 class="weatherContainer__temp">

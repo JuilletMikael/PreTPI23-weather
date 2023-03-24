@@ -9,57 +9,72 @@
 
     const props = defineProps({
         model : String,
-        size : Number
+        size : Number,
+        canvasIndex : String,
     })
 
+    const loader = new GLTFLoader();
     const container = ref(null);
+    let modelCrated = null;
 
   
     onMounted(() => {
-        // Créer une scène Three.js
         const scene = new THREE.Scene();
 
-        // Créer une caméra Three.js
+        // Creation of a camera
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 4;
 
-        // Créer une lampe
-        const light = new THREE.AmbientLight(0xffffff); // soft white light
-        scene.add(light);
+        // Creation of a directional light 
+        const directionalLight = new THREE.DirectionalLight( 0xffffff, 3 );
+        directionalLight.position.z = 4;
+        directionalLight.position.x = 1;
+        scene.add( directionalLight );
 
-        // Créer un rendu Three.js
+        // Creation of the threejs render
         const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.domElement.setAttribute('id', props.canvasIndex);
         container.value.appendChild(renderer.domElement);
 
-        // Fonction pour redimensionner la scène Three.js
-        const resize = () => {
+        
+
+        /**
+         * This function create a 3d model with the model pass by props.
+         */
+         loader.load('../src/assets/models/' + props.model + '.glb', function(gltf) {
+            modelCrated = gltf.scene;
+            modelCrated.scale.set(1,1,1);
+            scene.add(modelCrated);
+        }, undefined, function(error) {
+            console.log(error);
+        });
+
+
+        /**
+         * This function resize canvas to correspond to the container size. 
+         */
+         const resize = () => {
             const { width, height } = container.value.getBoundingClientRect();
             renderer.setSize(width, width);
             camera.aspect = width / width;
             camera.updateProjectionMatrix();
         };
-
-        // Redimensionner la scène Three.js lorsque la fenêtre est redimensionnée
         window.addEventListener('resize', resize);
-        
-        const loader = new GLTFLoader();
+        resize;
 
-        // Ceation du model
-        loader.load('../src/assets/models/' + props.model + '.glb', 
-        function(gltf) {
-            const modelCrated = gltf.scene;
-            modelCrated.scale.set(1,1,1);
-            scene.add(modelCrated);
-        }, undefined, 
-        function(error) {
-            console.log(error);
-        }
-        )   ;
 
-        // Animation de la scène Three.js
+        /**
+         * This function create the animation of the sceen
+         */
         const animate = function () {
-        requestAnimationFrame(animate);
-        renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+
+            if (props.canvasIndex == 'canvas-day' && modelCrated) {
+                const yPosition = Math.sin(Date.now() * 0.001) * 0.5;
+                modelCrated.position.y = yPosition;
+            }
+
+            renderer.render(scene, camera);
         };
         animate();
     });
