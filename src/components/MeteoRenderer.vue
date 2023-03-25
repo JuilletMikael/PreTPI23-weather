@@ -19,6 +19,10 @@
 
   
     onMounted(() => {
+        
+        var isRotating = false;
+        var rotationSpeed = 0.01;
+
         const scene = new THREE.Scene();
 
         // Creation of a camera
@@ -31,12 +35,22 @@
         directionalLight.position.x = 1;
         scene.add( directionalLight );
 
+        /**
+         * This function resize canvas to correspond to the container size. 
+         */
+         const resize = () => {
+            const { width, height } = container.value.getBoundingClientRect();
+            renderer.setSize(width, width);
+            camera.aspect = width / width;
+            camera.updateProjectionMatrix();
+        };
+
         // Creation of the threejs render
         const renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.domElement.setAttribute('id', props.canvasIndex);
         container.value.appendChild(renderer.domElement);
 
-        
+        resize();
 
         /**
          * This function create a 3d model with the model pass by props.
@@ -48,20 +62,12 @@
         }, undefined, function(error) {
             console.log(error);
         });
+        
+        // Listen to a click to change isRotation value
+        container.value.addEventListener('click', function () {if (!isRotating) isRotating = true;});
 
-
-        /**
-         * This function resize canvas to correspond to the container size. 
-         */
-         const resize = () => {
-            const { width, height } = container.value.getBoundingClientRect();
-            renderer.setSize(width, width);
-            camera.aspect = width / width;
-            camera.updateProjectionMatrix();
-        };
+        //Listent to windows resize
         window.addEventListener('resize', resize);
-        resize;
-
 
         /**
          * This function create the animation of the sceen
@@ -71,7 +77,18 @@
 
             if (props.canvasIndex == 'canvas-day' && modelCrated) {
                 const yPosition = Math.sin(Date.now() * 0.001) * 0.5;
-                modelCrated.position.y = yPosition;
+                modelCrated.position.y = yPosition;  
+            }
+
+
+            if (isRotating) {
+                modelCrated.rotation.y += rotationSpeed;
+
+                // Si la rotation est terminée, on arrête la rotation
+                if (modelCrated.rotation.y >= Math.PI * 2) {
+                    modelCrated.rotation.y = 0;
+                    isRotating = false;
+                }
             }
 
             renderer.render(scene, camera);
