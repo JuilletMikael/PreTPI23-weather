@@ -1,21 +1,20 @@
 <script setup>
-    import moment from 'moment';
     import MeteoRenderer from './MeteoRenderer.vue'
+    import dayjs from 'dayjs';
+    import 'dayjs/locale/fr';
 
-    var localLocale = moment();
-    localLocale.locale('fr');
-    
     const index = 'day';
-
     const props = defineProps({
         weather : Object
     })
+
+    dayjs.locale('fr');
 </script>
 
 <template>
     <div class="weatherContainer">
         <h1 class="weatherContainer__title">
-            {{ moment(props.weather.day, 'YYYY-MM-DD').format("dddd") }}
+            {{ dayjs(props.weather.day, 'YYYY-MM-DD').format("dddd") }}
         </h1>
 
         <div class="weatherContainer__model">
@@ -85,6 +84,7 @@
         grid-column: 1 / 3;
         grid-row: 2 / 3;
         max-width: 25vw;
+        cursor: pointer;
     }
 
     .weatherContainer__title{

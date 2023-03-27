@@ -12,9 +12,13 @@ const choosenDay = ref(null)
 function SelectChoosenDay(){
     if (choosenDay.value == null){
         return weather.weather[0];
-    }
+    }    
+    return choosenDay.value
+}
+
+function changeChoosenDay(value) {
+    choosenDay.value = value;
     
-    //TODO : make posible to choose the day.
 }
 
 async function send(){
@@ -36,7 +40,7 @@ async function send(){
         
         <div v-if="weather.weather.length > 0 ">
             <WeatherDayDetails :weather="SelectChoosenDay()"></WeatherDayDetails>
-            <WeatherWeek :weather="weather.weather"></WeatherWeek>
+            <WeatherWeek :weather="weather.weather" @choosenDay="changeChoosenDay"></WeatherWeek>
         </div>
     </main>
 </template>

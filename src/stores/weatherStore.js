@@ -5,6 +5,7 @@ export const useWeatherStore = defineStore('weather', {
     return {
       city : "",
       weather :[],
+      choosenDay : null,
     }
   },
 })
