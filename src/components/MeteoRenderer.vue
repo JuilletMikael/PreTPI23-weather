@@ -3,6 +3,13 @@
 </template>
   
 <script setup>
+/**
+ *  @file      MeteoRenderer.vue
+ *  @brief     Vue or component that used to create / rendre meteo with Thre.js.
+ *  @author    Created by Miakel Juillet
+ *  @version   28.03.2023
+ */
+
     import * as THREE from 'three';
     import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
     import { ref, onMounted, defineProps } from 'vue';

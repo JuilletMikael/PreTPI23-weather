@@ -1,3 +1,10 @@
+/**
+ *  @file      requests.js
+ *  @brief     Model that used to make requests.
+ *  @author    Created by Miakel Juillet
+ *  @version   28.03.2023
+ */
+
 const url = import.meta.env.VITE_API_URL;
 const key = import.meta.env.VITE_API_KEY;
 const format = "format=json";

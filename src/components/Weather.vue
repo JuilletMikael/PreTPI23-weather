@@ -1,4 +1,11 @@
 <script setup>
+/**
+ *  @file      Weather.vue
+ *  @brief     Vue or component that used WeatherDayDetails and WeatherWeek to have a full weather.
+ *  @author    Created by Miakel Juillet
+ *  @version   28.03.2023
+ */
+
 import { GetLocalWeather } from '../controller/requests.js';
 import { ref, onMounted } from 'vue';
 import WeatherDayDetails from './WeatherDayDetails.vue';
@@ -9,6 +16,11 @@ const weather = useWeatherStore()
 const error = ref(null);
 const choosenDay = ref(null) 
 
+/**
+ * This function select the correct choosen day. 
+ * 
+ * @returns object content the specific choosen day.
+ */
 function SelectChoosenDay(){
     if (choosenDay.value == null){
         return weather.weather[0];
@@ -16,18 +28,24 @@ function SelectChoosenDay(){
     return choosenDay.value
 }
 
+/**
+ * This function attribute the choosen day returned by WeatherWeek.
+ * 
+ * @param {Object} value valuue retured by WeatherWeek
+ */
 function changeChoosenDay(value) {
     choosenDay.value = value;
-    
 }
 
+/**
+ * This function send data to GetLocalWeather.
+ */
 async function send(){
     if(weather.city) {
         weather.weather = [];
         error.value = await GetLocalWeather(weather.city);
     }
 }
-
 </script>
 
 <template>

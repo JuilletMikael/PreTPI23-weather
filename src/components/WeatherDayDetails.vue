@@ -1,4 +1,11 @@
 <script setup>
+/**
+ *  @file      WeatherDayDetails.vue
+ *  @brief     Vue or component that display one day detailed weather.
+ *  @author    Created by Miakel Juillet
+ *  @version   28.03.2023
+ */
+
     import MeteoRenderer from './MeteoRenderer.vue'
     import dayjs from 'dayjs';
     import 'dayjs/locale/fr';

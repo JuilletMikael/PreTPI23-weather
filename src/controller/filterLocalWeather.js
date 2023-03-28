@@ -1,3 +1,10 @@
+/**
+ *  @file      filterWeather.js
+ *  @brief     Controller that filter the weather getted to the weatherStore.
+ *  @author    Created by Miakel Juillet
+ *  @version   28.03.2023
+ */
+
 import moment from 'moment';
 import{ useWeatherStore } from '@/stores/weatherStore';
 
